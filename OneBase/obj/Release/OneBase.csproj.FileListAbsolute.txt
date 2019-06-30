@@ -1,0 +1,18 @@
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\bin\OneBase.dll.config
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\bin\OneBase.dll
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\bin\OneBase.pdb
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\bin\EPPlus.dll
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\bin\EPPlus.xml
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\obj\Release\OneBase.dll
+C:\Users\michael\Documents\Visual Studio 2015\Projects\OneBase\OneBase\obj\Release\OneBase.pdb
+C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Release\OneBase.csprojResolveAssemblyReference.cache
+C:\Projects\OneBase\OneBase\bin\OneBase.dll.config
+C:\Projects\OneBase\OneBase\bin\OneBase.dll
+C:\Projects\OneBase\OneBase\bin\OneBase.pdb
+C:\Projects\OneBase\OneBase\bin\EPPlus.dll
+C:\Projects\OneBase\OneBase\bin\EPPlus.xml
+C:\Projects\OneBase\OneBase\obj\Release\OneBase.csprojAssemblyReference.cache
+C:\Projects\OneBase\OneBase\obj\Release\OneBase.csproj.CoreCompileInputs.cache
+C:\Projects\OneBase\OneBase\obj\Release\OneBase.csproj.CopyComplete
+C:\Projects\OneBase\OneBase\obj\Release\OneBase.dll
+C:\Projects\OneBase\OneBase\obj\Release\OneBase.pdb
