@@ -67,7 +67,7 @@
                 <asp:TableCell Width="50%" HorizontalAlign="Right">
                     <div id="DataListFollowUpComments" style="height:300px;overflow:auto">
                     <asp:DataList ID="DataList4" runat="server" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" 
-                        BorderWidth="1px" CellPadding="3" DataKeyField="numRowClients" GridLines="Horizontal" RepeatDirection="Vertical"
+                        BorderWidth="1px" CellPadding="3" DataKeyField="numRow" GridLines="Horizontal" RepeatDirection="Vertical"
                         OnEditCommand="DataList4_EditCommand" OnCancelCommand="DataList4_CancelCommand" 
                         OnDeleteCommand="DataList4_DeleteCommand" OnUpdateCommand="DataList4_UpdateCommand" > <%-- OnItemDataBound=" --%>
                         <AlternatingItemStyle BackColor="#F7F7F7" />
@@ -86,12 +86,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblVcComment" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcComment").ToString() %>' />
+                                        <asp:Label ID="lblVcWhatsNeeded" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcWhatsNeeded").ToString() %>' />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblDatFollowUp" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFollowUp").ToString() %>' />
+                                        <asp:Label ID="lblDatFollowUp" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFollowUp").ToString().Split()[0] %>' />
                                     </td>
                                 </tr>
                                 <tr style="border-bottom:2px solid grey">
@@ -104,9 +104,27 @@
                             <EditItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcComment").ToString() %>' />
+                                        <asp:Label ID="lblDatComment" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datComment").ToString().Split()[0] %>' />,  
+                                        <asp:Label ID="lblVcCommentBy" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcCommentBy") %>' />
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtVcWhatsNeeded" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcWhatsNeeded").ToString() %>' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtDatFollowUp" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFollowUp").ToString().Split()[0] %>' />
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid grey">
+                                    <td>
+                                        <asp:LinkButton id="LinkButton1" runat="server" CommandName="Update" Text="Update" />
+                                        <asp:LinkButton id="LinkButton2" runat="server" Text="Cancel" CommandName="cancel" />
+                                    </td>
+                                </tr>
+
                                 <%--
                                 <tr>
                                 <asp:Label ID="Label9" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFuComment").ToString().Split()[0] %>' />,  
@@ -127,12 +145,40 @@
                     <table style="margin-left:10px; margin-right:5px">
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtVcCommentBy" runat="server" Width="95px" PlaceHolder="Name" onkeydown = "return (event.keyCode!=13);" />
-                                <asp:TextBox ID="txtDatFollowUp" runat="server" Width="95px" PlaceHolder="Follow-Up Date" onkeydown = "return (event.keyCode!=13);" />
-                                <br />
-                                <asp:TextBox ID="txtVcComment" runat="server" Width="500px" Height="150px" TextMode="MultiLine" PlaceHolder="Whats Needed" onkeydown = "return (event.keyCode!=13);" />
-                                <br />
+                                <asp:ListBox ID="listboxInsStatus_Clients" runat="server" Height="100px" Width="150px">
+                                    <asp:ListItem Value="Pending - Maxixus">Pending - Maximus</asp:ListItem>
+                                    <asp:ListItem Value="Pending - Switchover">Pending - Switchover</asp:ListItem>
+                                    <asp:ListItem Value="Confirmed">Confirmed</asp:ListItem>
+                                    <asp:ListItem Value="Pre-Authorized">Pre-Authorized</asp:ListItem>
+                                    <asp:ListItem Value="Authorized">Authorized</asp:ListItem>
+                                </asp:ListBox>
+                            </td>
+                            <td>&emsp;</td>
+                            <td rowspan="2">
+                                <asp:TextBox ID="txtVcWhatsNeeded" runat="server" Width="400px" Height="150px" TextMode="MultiLine" PlaceHolder="Whats Needed" onkeydown = "return (event.keyCode!=13);" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="txtVcMltc" runat="server" Width="146px" PlaceHolder="MLTC Plan" onkeydown = "return (event.keyCode!=13);" />
+                            </td>
+                            <td>&emsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <asp:Button ID="btnAppendFollowUp" runat="server" Text="Append <=" OnClick="btnAppendFollowUp_Click" /><br />
+                            </td>
+                            <td></td>
+                            <td>
+                                <asp:TextBox ID="txtDatFollowUp" runat="server" Width="95px" PlaceHolder="Follow-Up Date" onkeydown = "return (event.keyCode!=13);" />
+                            </td>
                         </tr>
                     </table>
 
@@ -168,15 +214,15 @@
                                     <asp:TextBox ID="txtDatAdded" runat="server" Text='<%# Bind ("datAdded") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded") %>'></asp:Label>
+                                    <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded").ToString().Split()[0] %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcHow">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtVcCampaign" runat="server" Text='<%# Bind ("vcHow") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtVcHow" runat="server" Text='<%# Bind ("vcHow") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcCampaign" runat="server" Text='<%# Eval("vcHow") %>'></asp:Label>
+                                    <asp:Label ID="lblVcHow" runat="server" Text='<%# Eval("vcHow") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcComment">
@@ -187,7 +233,15 @@
                                     <asp:Label ID="lblVcComment" runat="server" Text='<%# Eval("vcComment") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="vcMcdNo" SortExpression="vcMcdNo">
+                            <asp:TemplateField HeaderText="vcInsStatus">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtVcInsStatus" runat="server" Text='<%# Bind ("vcInsStatus") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblVcInsStatus" runat="server" Text='<%# Eval("vcInsStatus") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="vcMcdNo">
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtVcMcdNo" runat="server" Text='<%# Bind ("vcMcdNo") %>'></asp:TextBox>
                                 </EditItemTemplate>
@@ -216,7 +270,7 @@
                                     <asp:TextBox ID="txtVcP" runat="server" Text='<%# Bind ("vcP") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>'></asp:Label>
+                                    <asp:LinkButton ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>' OnClick="btnPreview_Click"></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcPR">
@@ -272,7 +326,7 @@
                                     <asp:TextBox ID="txtDatDOB" runat="server" Text='<%# Bind ("datDOB") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblDatDOB" runat="server" Text='<%# Eval("datDOB") %>'></asp:Label>
+                                    <asp:Label ID="lblDatDOB" runat="server" Text='<%# Eval("datDOB").ToString().Split()[0] %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -343,7 +397,7 @@
                         <asp:TextBox ID="txtDatAdded" runat="server" Text='<%# Bind ("datAdded") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded") %>'></asp:Label>
+                        <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded").ToString().Split()[0] %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcHow">
@@ -362,12 +416,20 @@
                         <asp:Label ID="lblVcComment" runat="server" Text='<%# Eval("vcComment") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcInsStatus">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcInsStatus" runat="server" Text='<%# Bind ("vcInsStatus") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcInsStatus" runat="server" Text='<%# Eval("vcInsStatus") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcMcdNo">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtVcMcdNo" runat="server" Text='<%# Bind ("vcMcdNo") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lblVcMcdNo" runat="server" Text='<%# Eval("vcMcdNo") %>' OnClick="btnPreview_Click"></asp:LinkButton>
+                        <asp:Label ID="lblVcMcdNo" runat="server" Text='<%# Eval("vcMcdNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcMltc">
@@ -391,7 +453,7 @@
                         <asp:TextBox ID="txtVcP" runat="server" Text='<%# Bind ("vcP") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>'></asp:Label>
+                        <asp:LinkButton ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>' OnClick="btnPreview_Click"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcPR">
@@ -400,6 +462,54 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblVcPR" runat="server" Text='<%# Eval("vcPR") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcP2">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcP2" runat="server" Text='<%# Bind ("vcP2") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcP2" runat="server" Text='<%# Eval("vcP2") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcP2R">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcP2R" runat="server" Text='<%# Bind ("vcP2R") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcP2R" runat="server" Text='<%# Eval("vcP2R") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcAddr">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcAddr" runat="server" Text='<%# Bind ("vcAddr") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcAddr" runat="server" Text='<%# Eval("vcAddr") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcApt">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcApt" runat="server" Text='<%# Bind ("vcApt") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcApt" runat="server" Text='<%# Eval("vcApt") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcCity">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcCity" runat="server" Text='<%# Bind ("vcCity") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcCity" runat="server" Text='<%# Eval("vcCity") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcZip">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcZip" runat="server" Text='<%# Bind ("vcZip") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcZip" runat="server" Text='<%# Eval("vcZip") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcLang">
@@ -431,7 +541,111 @@
                         <asp:TextBox ID="txtDatDOB" runat="server" Text='<%# Bind ("datDOB") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblDatDOB" runat="server" Text='<%# Eval("datDOB") %>'></asp:Label>
+                        <asp:Label ID="lblDatDOB" runat="server" Text='<%# Eval("datDOB").ToString().Split()[0] %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcMobil">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcMobil" runat="server" Text='<%# Bind ("vcMobil") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcMobil" runat="server" Text='<%# Eval("vcMobil") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcTransp">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcTransp" runat="server" Text='<%# Bind ("vcTransp") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcTransp" runat="server" Text='<%# Eval("vcTransp") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcAuthNo">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcAuthNo" runat="server" Text='<%# Bind ("vcAuthNo") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblVcAuthNo" runat="server" Text='<%# Eval("vcAuthNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="datAuth">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtDatAuth" runat="server" Text='<%# Bind ("datAuth") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblDatAuth" runat="server" Text='<%# Eval("datAuth").ToString().Split()[0] %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="datEffectiv">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtDatEffectiv" runat="server" Text='<%# Bind ("datEffectiv") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblDatEffectiv" runat="server" Text='<%# Eval("datEffectiv").ToString().Split()[0] %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="datExp">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtDatExp" runat="server" Text='<%# Bind ("datExp") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblDatExp" runat="server" Text='<%# Eval("datExp").ToString().Split()[0] %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Sun">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Sun" runat="server" Text='<%# Bind ("bHHA_Sun") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Sun" runat="server" Text='<%# Eval("bHHA_Sun") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Mon">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Mon" runat="server" Text='<%# Bind ("bHHA_Mon") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Mon" runat="server" Text='<%# Eval("bHHA_Mon") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Tue">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Tue" runat="server" Text='<%# Bind ("bHHA_Tue") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Tue" runat="server" Text='<%# Eval("bHHA_Tue") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Wed">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Wed" runat="server" Text='<%# Bind ("bHHA_Wed") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Wed" runat="server" Text='<%# Eval("bHHA_Wed") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Thu">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Thu" runat="server" Text='<%# Bind ("bHHA_Thu") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Thu" runat="server" Text='<%# Eval("bHHA_Thu") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Fri">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Fri" runat="server" Text='<%# Bind ("bHHA_Fri") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Fri" runat="server" Text='<%# Eval("bHHA_Fri") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="bHHA_Sat">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtBHHA_Sat" runat="server" Text='<%# Bind ("bHHA_Sat") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblBHHA_Sat" runat="server" Text='<%# Eval("bHHA_Sat") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -447,12 +661,12 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            gridviewScroll('#GridView1', $(window).height() / 1.6, 2);
+            gridviewScroll('#GridView1', $(window).height() / 2, 2);
             gridviewScroll('#GridView2', 200, 5);
         });
 
         $(window).on('resize', function () {
-            gridviewScroll('#GridView1', $(window).height() / 1.6, 2);
+            gridviewScroll('#GridView1', $(window).height() / 2, 2);
             gridviewScroll('#GridView2', 200, 5);
         });
 
@@ -474,7 +688,8 @@
                 railsize: 16,
                 barsize: 8
             });
-	    }
+
+        }
 	</script>
 </body>
 </html>

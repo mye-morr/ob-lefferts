@@ -74,6 +74,7 @@
     <Content Include="gridviewScroll.min.js" />
     <Content Include="Clients.aspx" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
