@@ -192,7 +192,7 @@ namespace OneBase
 
         protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
+            string numRow = GridView2.DataKeys[e.RowIndex].Value.ToString();
 
             TextBox txtDatAdded = GridView2.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
             TextBox txtVcHow = GridView2.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
@@ -205,10 +205,27 @@ namespace OneBase
             TextBox txtVcPR = GridView2.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
             TextBox txtVcP2 = GridView2.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
             TextBox txtVcP2R = GridView2.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcAddr = GridView2.Rows[e.RowIndex].FindControl("txtVcAddr") as TextBox;
+            TextBox txtVcApt = GridView2.Rows[e.RowIndex].FindControl("txtVcApt") as TextBox;
+            TextBox txtVcCity = GridView2.Rows[e.RowIndex].FindControl("txtVcCity") as TextBox;
+            TextBox txtVcZip = GridView2.Rows[e.RowIndex].FindControl("txtVcZip") as TextBox;
             TextBox txtVcLang = GridView2.Rows[e.RowIndex].FindControl("txtVcLang") as TextBox;
             TextBox txtVcSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcSSN") as TextBox;
             TextBox txtVcSex = GridView2.Rows[e.RowIndex].FindControl("txtVcSex") as TextBox;
             TextBox txtDatDOB = GridView2.Rows[e.RowIndex].FindControl("txtDatDOB") as TextBox;
+            TextBox txtVcMobil = GridView2.Rows[e.RowIndex].FindControl("txtVcMobil") as TextBox;
+            TextBox txtVcTransp = GridView2.Rows[e.RowIndex].FindControl("txtVcTransp") as TextBox;
+            TextBox txtVcAuthNo = GridView2.Rows[e.RowIndex].FindControl("txtVcAuthNo") as TextBox;
+            TextBox txtDatAuth = GridView2.Rows[e.RowIndex].FindControl("txtDatAuth") as TextBox;
+            TextBox txtDatEffectiv = GridView2.Rows[e.RowIndex].FindControl("txtDatEffectiv") as TextBox;
+            TextBox txtDatExp = GridView2.Rows[e.RowIndex].FindControl("txtDatExp") as TextBox;
+            TextBox txtBHHA_Sun = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Sun") as TextBox;
+            TextBox txtBHHA_Mon = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Mon") as TextBox;
+            TextBox txtBHHA_Tue = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Tue") as TextBox;
+            TextBox txtBHHA_Wed = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Wed") as TextBox;
+            TextBox txtBHHA_Thu = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Thu") as TextBox;
+            TextBox txtBHHA_Fri = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Fri") as TextBox;
+            TextBox txtBHHA_Sat = GridView2.Rows[e.RowIndex].FindControl("txtBHHA_Sat") as TextBox;
 
             String UpdateQuery = string.Format(
                 "UPDATE Clients SET "
@@ -223,11 +240,28 @@ namespace OneBase
                     + "vcPR={8},"
                     + "vcP2={9},"
                     + "vcP2R={10},"
-                    + "vcLang={11},"
-                    + "vcSSN={12},"
-                    + "vcSex={13},"
-                    + "datDOB={14} "
-                + "WHERE numRow={15}",
+                    + "vcAddr={11},"
+                    + "vcApt={12},"
+                    + "vcCity={13},"
+                    + "vcZip={14},"
+                    + "vcLang={15},"
+                    + "vcSSN={16},"
+                    + "vcSex={17},"
+                    + "datDOB={18},"
+                    + "vcMobil={19},"
+                    + "vcTransp={20},"
+                    + "vcAuthNo={21},"
+                    + "datAuth={22},"
+                    + "datEffectiv={23},"
+                    + "datExp={24},"
+                    + "bHHA_Sun={25},"
+                    + "bHHA_Mon={26},"
+                    + "bHHA_Tue={27},"
+                    + "bHHA_Wed={28},"
+                    + "bHHA_Thu={29},"
+                    + "bHHA_Fri={30},"
+                    + "bHHA_Sat={31} "
+                + "WHERE numRow={32}",
                     txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
                     txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
                     txtVcComment.Text.Equals("") ? "NULL" : "'" + txtVcComment.Text + "'",
@@ -239,10 +273,27 @@ namespace OneBase
                     txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
                     txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
                     txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcAddr.Text.Equals("") ? "NULL" : "'" + txtVcAddr.Text + "'",
+                    txtVcApt.Text.Equals("") ? "NULL" : "'" + txtVcApt.Text + "'",
+                    txtVcCity.Text.Equals("") ? "NULL" : "'" + txtVcCity.Text + "'",
+                    txtVcZip.Text.Equals("") ? "NULL" : "'" + txtVcZip.Text + "'",
                     txtVcLang.Text.Equals("") ? "NULL" : "'" + txtVcLang.Text + "'",
                     txtVcSSN.Text.Equals("") ? "NULL" : "'" + txtVcSSN.Text + "'",
                     txtVcSex.Text.Equals("") ? "NULL" : "'" + txtVcSex.Text + "'",
                     txtDatDOB.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatDOB.Text) + "'",
+                    txtVcMobil.Text.Equals("") ? "NULL" : "'" + txtVcMobil.Text + "'",
+                    txtVcTransp.Text.Equals("") ? "NULL" : "'" + txtVcTransp.Text + "'",
+                    txtVcAuthNo.Text.Equals("") ? "NULL" : "'" + txtVcAuthNo.Text + "'",
+                    txtDatAuth.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAuth.Text) + "'",
+                    txtDatEffectiv.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatEffectiv.Text) + "'",
+                    txtDatExp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatExp.Text) + "'",
+                    txtBHHA_Sun.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sun.Text + "'",
+                    txtBHHA_Mon.Text.Equals("") ? "NULL" : "'" + txtBHHA_Mon.Text + "'",
+                    txtBHHA_Tue.Text.Equals("") ? "NULL" : "'" + txtBHHA_Tue.Text + "'",
+                    txtBHHA_Wed.Text.Equals("") ? "NULL" : "'" + txtBHHA_Wed.Text + "'",
+                    txtBHHA_Thu.Text.Equals("") ? "NULL" : "'" + txtBHHA_Thu.Text + "'",
+                    txtBHHA_Fri.Text.Equals("") ? "NULL" : "'" + txtBHHA_Fri.Text + "'",
+                    txtBHHA_Sat.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sat.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -268,7 +319,7 @@ namespace OneBase
         protected void GridView1_RowDeleting(Object sender, GridViewDeleteEventArgs e)
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
-            string Query = "DELETE Claims WHERE numRow=" + numRow;
+            string Query = "DELETE Clients WHERE numRow=" + numRow;
 
             DataSet ds = GridDataTable(Query);
             Session["MainTable"] = ds.Tables[0];
@@ -583,8 +634,8 @@ namespace OneBase
             }
 
             sSQL = "SELECT * FROM "
-                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcWhatsNeeded FROM ClientsDetails cd WHERE cd.numRowClients = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
-                + "(SELECT MAX(datComment) FROM ClientsDetails cd WHERE cd.numRow = c.numRow) as datUpdate, "
+                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcWhatsNeeded FROM ClientsDetails cd WHERE cd.numRowClients = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpCommentsXX, "
+                + "(SELECT MAX(datComment) FROM ClientsDetails cd WHERE cd.numRow = c.numRow) as datUpdateXX, "
                 + "c.* FROM Clients c LEFT OUTER JOIN ClientsDetails cd ON cd.numRowClients = c.numRow) as t";
 
             if (sWhere.Length > 0)
@@ -644,7 +695,7 @@ namespace OneBase
                     String InsertQuery = string.Format(
                        "INSERT INTO ClientsDetails (numRowClients,datComment,vcCommentBy,vcInsStatus,vcWhatsNeeded,vcMltcPlan,datFollowUp) VALUES ("
                            + "{0},{1},{2},{3},{4},{5},{6});"
-                           + "UPDATE Clients SET vcMltc={5} WHERE numRow='"
+                           + "UPDATE Clients SET vcInsStatus={3}, vcMltc={5} WHERE numRow='"
                            + (txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text) + "'",
                         txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
                             "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
@@ -863,27 +914,28 @@ namespace OneBase
                 {
                     var wb = pck.Workbook;
                     var ws = wb.Worksheets.Add(info);
-                    for (var col = 2; col <= totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
+                    for (var col = 0; col < totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
                     {
-                        ws.SetValue(1, col - 1, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
-                        ws.Column(3).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
-                        ws.Column(17).Style.Numberformat.Format = "mm/dd/yyyy";    //datDOB
-                        ws.Column(21).Style.Numberformat.Format = "mm/dd/yyyy";    //datAuth
-                        ws.Column(22).Style.Numberformat.Format = "mm/dd/yyyy";    //datEffectiv
-                        ws.Column(23).Style.Numberformat.Format = "mm/dd/yyyy";    //datExp
+                        ws.SetValue(1, col + 1, dt.Columns[col].ColumnName);  //col to col-1 changed to avoid numRow
+                        ws.Column(2).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
+                        ws.Column(4).Style.Numberformat.Format = "mm/dd/yyyy";    //datDOB
+                        ws.Column(22).Style.Numberformat.Format = "mm/dd/yyyy";    //datAuth
+                        ws.Column(26).Style.Numberformat.Format = "mm/dd/yyyy";    //datEffectiv
+                        ws.Column(27).Style.Numberformat.Format = "mm/dd/yyyy";    //datExp
+                        ws.Column(28).Style.Numberformat.Format = "mm/dd/yyyy";    //datExp
                     }
 
                     for (var row = 0; row < rows.Count; row++) //printing rest of the rows
-                        for (var col = 1; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
+                        for (var col = 0; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
                         {
-                            if (col == 74) //for followup comnents column
+                            if (col == 0) //for followup comnents column
                             {
                                 var str = rows[row][col].ToString().Replace("||", Environment.NewLine + Environment.NewLine).Replace("|", Environment.NewLine + "   ");
-                                ws.SetValue(row + 2, col, str);  //col+1 changed to col to avoid numrow
+                                ws.SetValue(row + 2, col + 1, str);  //col+1 changed to col to avoid numrow
                             }
                             else
                             {
-                                ws.SetValue(row + 2, col, rows[row][col]);  ////col+1 changed to col to avoid numrow
+                                ws.SetValue(row + 2, col + 1, rows[row][col]);  ////col+1 changed to col to avoid numrow
                             }
                         }
                 });

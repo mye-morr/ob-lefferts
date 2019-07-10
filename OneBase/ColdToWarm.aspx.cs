@@ -97,7 +97,7 @@ namespace OneBase
         {
             DataList4.DataKeys[e.Item.ItemIndex].ToString();
             string numRowFu = DataList4.DataKeys[e.Item.ItemIndex].ToString();
-            string Query = "DELETE ColdToWarmDetails WHERE numRowColdToWarm=" + numRowFu;
+            string Query = "DELETE ColdToWarmDetails WHERE numRow=" + numRowFu;
 
             DataSet ds = GridDataTable(Query);
 
@@ -205,39 +205,69 @@ namespace OneBase
 
         protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
+            string numRow = GridView2.DataKeys[e.RowIndex].Value.ToString();
 
-            TextBox txtVcAcctNo = GridView2.Rows[e.RowIndex].FindControl("txtVcAcctNo") as TextBox;
-            TextBox txtVcClient = GridView2.Rows[e.RowIndex].FindControl("txtVcClient") as TextBox;
-            TextBox txtVcPatName = GridView2.Rows[e.RowIndex].FindControl("txtVcPatName") as TextBox;
-            TextBox txtVcPatSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcPatSSN") as TextBox;
-            TextBox txtVcPatIns = GridView2.Rows[e.RowIndex].FindControl("txtVcPatIns") as TextBox;
-            TextBox txtVcPatInsIdNo = GridView2.Rows[e.RowIndex].FindControl("txtVcPatInsIdNo") as TextBox;
-            TextBox txtDecTotalChgs = GridView2.Rows[e.RowIndex].FindControl("txtDecTotalChgs") as TextBox;
-            TextBox txtDecExpected = GridView2.Rows[e.RowIndex].FindControl("txtDecExpected") as TextBox;
-            TextBox txtVcUpCategory = GridView2.Rows[e.RowIndex].FindControl("txtVcUpCategory") as TextBox;
+            TextBox txtDatAdded = GridView2.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
+            TextBox txtVcHow = GridView2.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
+            TextBox txtVcReferral = GridView2.Rows[e.RowIndex].FindControl("txtVcReferral") as TextBox;
+            TextBox txtVcLoc = GridView2.Rows[e.RowIndex].FindControl("txtVcLoc") as TextBox;
+            TextBox txtVcName = GridView2.Rows[e.RowIndex].FindControl("txtVcName") as TextBox;
+            TextBox txtVcP = GridView2.Rows[e.RowIndex].FindControl("txtVcP") as TextBox;
+            TextBox txtVcPR = GridView2.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
+            TextBox txtVcP2 = GridView2.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
+            TextBox txtVcP2R = GridView2.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcAddr = GridView2.Rows[e.RowIndex].FindControl("txtVcAddr") as TextBox;
+            TextBox txtVcApt = GridView2.Rows[e.RowIndex].FindControl("txtVcApt") as TextBox;
+            TextBox txtVcCity = GridView2.Rows[e.RowIndex].FindControl("txtVcCity") as TextBox;
+            TextBox txtVcZip = GridView2.Rows[e.RowIndex].FindControl("txtVcZip") as TextBox;
+            TextBox txtVcNotes = GridView2.Rows[e.RowIndex].FindControl("txtVcNotes") as TextBox;
+            TextBox txtVcLastStat = GridView2.Rows[e.RowIndex].FindControl("txtVcLastStat") as TextBox;
+            TextBox txtVcLevel = GridView2.Rows[e.RowIndex].FindControl("txtVcLevel") as TextBox;
+            TextBox txtVcInterest = GridView2.Rows[e.RowIndex].FindControl("txtVcInterest") as TextBox;
+            TextBox txtVcInsStatus = GridView2.Rows[e.RowIndex].FindControl("txtVcInsStatus") as TextBox;
+            TextBox txtDatNext = GridView2.Rows[e.RowIndex].FindControl("txtDatNext") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE Initial SET "
-                    + "vcAcctNo={0},"
-                    + "vcClient={1},"
-                    + "vcPatName={2},"
-                    + "vcPatSSN={3},"
-                    + "vcPatIns={4},"
-                    + "vcPatInsIdNo={5},"
-                    + "decTotalChgs={6},"
-                    + "decExpected={7},"
-                    + "vcUpCategory={8} "
-                + "WHERE numRow={9}",
-                    txtVcAcctNo.Text.Equals("") ? "NULL" : "'" + txtVcAcctNo.Text + "'",
-                    txtVcClient.Text.Equals("") ? "NULL" : "'" + txtVcClient.Text + "'",
-                    txtVcPatName.Text.Equals("") ? "NULL" : "'" + txtVcPatName.Text + "'",
-                    txtVcPatSSN.Text.Equals("") ? "NULL" : "'" + txtVcPatSSN.Text + "'",
-                    txtVcPatIns.Text.Equals("") ? "NULL" : "'" + txtVcPatIns.Text + "'",
-                    txtVcPatInsIdNo.Text.Equals("") ? "NULL" : "'" + txtVcPatInsIdNo.Text + "'",
-                    txtDecTotalChgs.Text.Equals("") ? "NULL" : "'" + txtDecTotalChgs.Text + "'",
-                    txtDecExpected.Text.Equals("") ? "NULL" : "'" + txtDecExpected.Text + "'",
-                    txtVcUpCategory.Text.Equals("") ? "NULL" : "'" + txtVcUpCategory.Text + "'",
+                "UPDATE ColdToWarm SET "
+                    + "datAdded={0},"
+                    + "vcHow={1},"
+                    + "vcReferral={2},"
+                    + "vcLoc={3},"
+                    + "vcName={4},"
+                    + "vcP={5},"
+                    + "vcPR={6},"
+                    + "vcP2={7},"
+                    + "vcP2R={8},"
+                    + "vcAddr={9},"
+                    + "vcApt={10},"
+                    + "vcCity={11},"
+                    + "vcZip={12},"
+                    + "vcNotes={13},"
+                    + "vcLastStat={14},"
+                    + "vcLevel={15},"
+                    + "vcInterest={16},"
+                    + "vcInsStatus={17},"
+                    + "datNext={18} "
+                + "WHERE numRow={19}",
+                    txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
+                    txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
+                    txtVcReferral.Text.Equals("") ? "NULL" : "'" + txtVcReferral.Text + "'",
+                    txtVcLoc.Text.Equals("") ? "NULL" : "'" + txtVcLoc.Text + "'",
+                    txtVcName.Text.Equals("") ? "NULL" : "'" + txtVcName.Text + "'",
+                    txtVcP.Text.Equals("") ? "NULL" : "'" + txtVcP.Text + "'",
+                    txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
+                    txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
+                    txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcAddr.Text.Equals("") ? "NULL" : "'" + txtVcAddr.Text + "'",
+                    txtVcApt.Text.Equals("") ? "NULL" : "'" + txtVcApt.Text + "'",
+                    txtVcCity.Text.Equals("") ? "NULL" : "'" + txtVcCity.Text + "'",
+                    txtVcZip.Text.Equals("") ? "NULL" : "'" + txtVcZip.Text + "'",
+                    txtVcNotes.Text.Equals("") ? "NULL" : "'" + txtVcNotes.Text + "'",
+                    txtVcLastStat.Text.Equals("") ? "NULL" : "'" + txtVcLastStat.Text + "'",
+                    txtVcLevel.Text.Equals("") ? "NULL" : "'" + txtVcLevel.Text + "'",
+                    txtVcInterest.Text.Equals("") ? "NULL" : "'" + txtVcInterest.Text + "'",
+                    txtVcInsStatus.Text.Equals("") ? "NULL" : "'" + txtVcInsStatus.Text + "'",
+                    txtDatNext.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatNext.Text) + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -539,8 +569,8 @@ namespace OneBase
             }
 
             sSQL = "SELECT * FROM "
-                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcNotes FROM ColdToWarmDetails cd WHERE cd.numRowColdToWarm = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
-                + "(SELECT MAX(datComment) FROM ColdToWarmDetails cd WHERE cd.numRow = c.numRow) as datUpdate, "
+                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcNotes FROM ColdToWarmDetails cd WHERE cd.numRowColdToWarm = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpCommentsXX, "
+                + "(SELECT MAX(datComment) FROM ColdToWarmDetails cd WHERE cd.numRow = c.numRow) as datUpdateXX, "
                 + "c.* FROM ColdToWarm c LEFT OUTER JOIN ColdToWarmDetails cd ON cd.numRowColdToWarm = c.numRow) as t";
 
             if (sWhere.Length > 0)
@@ -813,24 +843,25 @@ namespace OneBase
                 {
                     var wb = pck.Workbook;
                     var ws = wb.Worksheets.Add(info);
-                    for (var col = 2; col <= totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
+                    for (var col = 0; col < totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
                     {
-                        ws.SetValue(1, col - 1, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
-                        ws.Column(3).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
-                        ws.Column(21).Style.Numberformat.Format = "mm/dd/yyyy";    //datNext
+                        ws.SetValue(1, col + 1, dt.Columns[col].ColumnName);  //col to col-1 changed to avoid numRow
+                        ws.Column(2).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
+                        ws.Column(4).Style.Numberformat.Format = "mm/dd/yyyy";    //datNext
+                        ws.Column(22).Style.Numberformat.Format = "mm/dd/yyyy";    //datNext
                     }
 
                     for (var row = 0; row < rows.Count; row++) //printing rest of the rows
-                        for (var col = 1; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
+                        for (var col = 0; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
                         {
-                            if (col == 74) //for followup comnents column
+                            if (col == 0) //for followup comnents column
                             {
                                 var str = rows[row][col].ToString().Replace("||", Environment.NewLine + Environment.NewLine).Replace("|", Environment.NewLine + "   ");
-                                ws.SetValue(row + 2, col, str);  //col+1 changed to col to avoid numrow
+                                ws.SetValue(row + 2, col + 1, str);  //col+1 changed to col to avoid numrow
                             }
                             else
                             {
-                                ws.SetValue(row + 2, col, rows[row][col]);  ////col+1 changed to col to avoid numrow
+                                ws.SetValue(row + 2, col + 1, rows[row][col]);  ////col+1 changed to col to avoid numrow
                             }
                         }
                 });
