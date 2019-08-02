@@ -146,7 +146,7 @@
                         <tr>
                             <td>
                                 <asp:ListBox ID="listboxInsStatus_Clients" runat="server" Height="100px" Width="150px">
-                                    <asp:ListItem Value="Pending - Maxixus">Pending - Maximus</asp:ListItem>
+                                    <asp:ListItem Value="Pending - Maximus">Pending - Maximus</asp:ListItem>
                                     <asp:ListItem Value="Pending - Switchover">Pending - Switchover</asp:ListItem>
                                     <asp:ListItem Value="Confirmed">Confirmed</asp:ListItem>
                                     <asp:ListItem Value="Pre-Authorized">Pre-Authorized</asp:ListItem>
