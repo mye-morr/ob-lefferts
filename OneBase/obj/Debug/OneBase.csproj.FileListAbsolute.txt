@@ -14,3 +14,4 @@ C:\Projects\OneBase\OneBase\bin\EPPlus.xml
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csproj.CopyComplete
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.dll
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.pdb
+C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csprojAssemblyReference.cache

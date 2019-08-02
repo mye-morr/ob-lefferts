@@ -669,7 +669,7 @@ namespace OneBase
 
             if (!txtSearch.Text.Equals(""))
             {
-                sSQL += "Select cd.* FROM Clients c INNER JOIN ClientsDetails cd ON cd.numRowClients = c.numRow WHERE c.[vcP]='" + txtSearch.Text + "';";
+                sSQL += "Select cd.* FROM Clients c INNER JOIN ClientsDetails cd ON cd.numRowClients = c.numRow WHERE c.[vcP]='" + txtSearch.Text + "' ORDER BY cd.datComment;";
             }
 
             return sSQL;
@@ -717,10 +717,13 @@ namespace OneBase
                     DataList4.DataSource = ds.Tables[3];
                     DataList4.DataBind();
 
-                    listboxInsStatus_Clients.ClearSelection();
                     txtVcWhatsNeeded.Text = "";
-                    txtVcMltc.Text = "";
                     txtDatFollowUp.Text = "";
+
+                    DataTable dtRecord = ds.Tables[2];
+                    txtNumRow.Text = dtRecord.Rows[0]["numRow"].ToString();
+                    listboxInsStatus_Clients.Text = dtRecord.Rows[0]["vcInsStatus"].ToString();
+                    txtVcMltc.Text = dtRecord.Rows[0]["vcMltc"].ToString();
                 }
             }
         }
@@ -837,6 +840,11 @@ namespace OneBase
 
             DataList4.DataSource = null;
             DataList4.DataBind();
+
+            listboxInsStatus_Clients.ClearSelection();
+            txtVcWhatsNeeded.Text = "";
+            txtVcMltc.Text = "";
+            txtDatFollowUp.Text = "";
         }
 
         protected void btnPreview_Click(object sender, EventArgs e)
