@@ -571,7 +571,7 @@ namespace OneBase
             sSQL = "SELECT * FROM "
                 + "(SELECT DISTINCT(STUFF((SELECT '||' + vcNotes FROM ColdToWarmDetails cd WHERE cd.numRowColdToWarm = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
                 + "(SELECT MAX(datComment) FROM ColdToWarmDetails cd WHERE cd.numRow = c.numRow) as datUpdateXX, "
-                + "c.* FROM ColdToWarm c LEFT OUTER JOIN ColdToWarmDetails cd ON cd.numRowColdToWarm = c.numRow) as t";
+                + "c.* FROM ColdToWarm c LEFT OUTER JOIN ColdToWarmDetails cd ON cd.numRowColdToWarm = c.numRow) as t ORDER BY vcName";
 
             if (sWhere.Length > 0)
             {
