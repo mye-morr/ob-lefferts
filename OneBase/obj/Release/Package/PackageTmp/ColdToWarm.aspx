@@ -21,7 +21,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="gridviewScroll.min.js"></script>
-    <link href="GridviewScroll.css" rel="stylesheet" />
+    <link href="GridviewScroll.css" rel="stylesheet"/>
 
     <script type="text/javascript">
 	  function triggerFileUpload()
