@@ -135,7 +135,7 @@ namespace OneBase
                 "UPDATE ClientsDetails SET "
                     + "vcWhatsNeeded={0},"
                     + "datFollowUp={1} "
-                + "WHERE numRowClients={2}",
+                + "WHERE numRow={2}",
                     txtVcWhatsNeeded.Text.Equals("") ? "NULL" : "'" + txtVcWhatsNeeded.Text + "'",
                     txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + txtDatFollowUp.Text + "'",
                     Convert.ToInt32(numRow)
@@ -628,7 +628,6 @@ namespace OneBase
                         else
                         {
                             sWhere = sSQLTail;
-                            sOrderBy = "ORDER BY vcName";
                         }
                     }
                 }
@@ -644,10 +643,12 @@ namespace OneBase
                 sSQL += " WHERE (1=1) AND " + sWhere;
             }
 
-            if (sOrderBy.Length > 0)
+            if (sOrderBy.Length == 0)
             {
-                sSQL += " " + sOrderBy;
+                sOrderBy = "ORDER BY vcName";
             }
+
+            sSQL += " " + sOrderBy;
 
             return sSQL + ";";
         }
@@ -696,8 +697,7 @@ namespace OneBase
                     String InsertQuery = string.Format(
                        "INSERT INTO ClientsDetails (numRowClients,datComment,vcCommentBy,vcInsStatus,vcWhatsNeeded,vcMltcPlan,datFollowUp) VALUES ("
                            + "{0},{1},{2},{3},{4},{5},{6});"
-                           + "UPDATE Clients SET vcInsStatus={3}, vcMltc={5} WHERE numRow='"
-                           + (txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text) + "'",
+                           + "UPDATE Clients SET vcInsStatus={3}, vcMltc={5} WHERE numRow={0}",
                         txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
                             "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
                             "'User'",

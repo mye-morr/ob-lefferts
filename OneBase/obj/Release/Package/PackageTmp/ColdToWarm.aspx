@@ -104,9 +104,16 @@
                             <EditItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcComment").ToString() %>' />
+                                        <asp:TextBox ID="txtVcNotes" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcNotes").ToString() %>' />
                                     </td>
                                 </tr>
+                                <tr style="border-bottom:2px solid grey">
+                                    <td>
+                                        <asp:LinkButton id="LinkButton1" runat="server" CommandName="Update" Text="Update" />
+                                        <asp:LinkButton id="LinkButton2" runat="server" Text="Cancel" CommandName="cancel" />
+                                    </td>
+                                </tr>
+
                                 <%--
                                 <tr>
                                 <asp:Label ID="Label9" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFuComment").ToString().Split()[0] %>' />,  
@@ -128,7 +135,8 @@
                         <tr>
                             <td>
                                 <asp:ListBox ID="listboxInsStatus_ColdToWarm" runat="server" Height="100px" Width="150px">
-                                    <asp:ListItem Value="Pending">Pending</asp:ListItem>
+                                    <asp:ListItem Value="Pending - Maximus">Pending - Maximus</asp:ListItem>
+                                    <asp:ListItem Value="Pending - Switchover">Pending - Switchover</asp:ListItem>
                                     <asp:ListItem Value="Confirmed">Confirmed</asp:ListItem>
                                     <asp:ListItem Value="Pre-Authorized">Pre-Authorized</asp:ListItem>
                                     <asp:ListItem Value="Authorized">Authorized</asp:ListItem>
@@ -141,7 +149,9 @@
                         </tr>
                         <tr>
                             <td>
+                                <!-- doesn't exist in db currently
                                 <asp:TextBox ID="txtVcMltc" runat="server" Width="146px" PlaceHolder="MLTC Plan" onkeydown = "return (event.keyCode!=13);" />
+                                -->
                             </td>
                             <td>&emsp;</td>
                         </tr>

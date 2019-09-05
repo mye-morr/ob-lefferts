@@ -5,13 +5,13 @@ C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\EPPlu
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\EPPlus.xml
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Debug\OneBase.dll
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Debug\OneBase.pdb
-C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csproj.CoreCompileInputs.cache
+C:\Projects\OneBase\OneBase\bin\EPPlus.xml
 C:\Projects\OneBase\OneBase\bin\OneBase.dll.config
 C:\Projects\OneBase\OneBase\bin\OneBase.dll
 C:\Projects\OneBase\OneBase\bin\OneBase.pdb
 C:\Projects\OneBase\OneBase\bin\EPPlus.dll
-C:\Projects\OneBase\OneBase\bin\EPPlus.xml
+C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csprojAssemblyReference.cache
+C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csproj.CoreCompileInputs.cache
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csproj.CopyComplete
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.dll
 C:\Projects\OneBase\OneBase\obj\Debug\OneBase.pdb
-C:\Projects\OneBase\OneBase\obj\Debug\OneBase.csprojAssemblyReference.cache

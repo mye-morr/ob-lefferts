@@ -127,30 +127,15 @@ namespace OneBase
 
         protected void DataList4_UpdateCommand(object sender, DataListCommandEventArgs e)
         {
+
             string numRow = DataList4.DataKeys[e.Item.ItemIndex].ToString();
 
-            TextBox txtVcCallRefNo = e.Item.FindControl("txtVcCallRefNo") as TextBox;
-            TextBox txtVcFuComment = e.Item.FindControl("txtVcFuComment") as TextBox;
-            TextBox txtVcContactName = e.Item.FindControl("txtVcContactName") as TextBox;
-            TextBox txtVcContactPhone = e.Item.FindControl("txtVcContactPhone") as TextBox;
-            TextBox txtVcContactEmail = e.Item.FindControl("txtVcContactEmail") as TextBox;
-            TextBox txtDatFollowUp = e.Item.FindControl("txtDatFollowUp") as TextBox;
-
+            TextBox txtVcNotes = e.Item.FindControl("txtVcNotes") as TextBox;
             String UpdateQuery = string.Format(
-                "UPDATE FollowUp SET "
-                    + "vcCallRefNo={0},"
-                    + "vcFuComment={1},"
-                    + "vcContactName={2},"
-                    + "vcContactPhone={3},"
-                    + "vcContactEmail={4},"
-                    + "datFollowUp={5} "
-                + "WHERE numRow={6}",
-                    txtVcCallRefNo.Text.Equals("") ? "NULL" : "'" + txtVcCallRefNo.Text + "'",
-                    txtVcFuComment.Text.Equals("") ? "NULL" : "'" + txtVcFuComment.Text + "'",
-                    txtVcContactName.Text.Equals("") ? "NULL" : "'" + txtVcContactName.Text + "'",
-                    txtVcContactPhone.Text.Equals("") ? "NULL" : "'" + txtVcContactPhone.Text + "'",
-                    txtVcContactEmail.Text.Equals("") ? "NULL" : "'" + txtVcContactEmail.Text + "'",
-                    txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatFollowUp.Text) + "'",
+                "UPDATE ColdToWarmDetails SET "
+                    + "vcNotes={0} "
+                + "WHERE numRow={1}",
+                    txtVcNotes.Text.Equals("") ? "NULL" : "'" + txtVcNotes.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -563,7 +548,6 @@ namespace OneBase
                         else
                         {
                             sWhere = sSQLTail;
-                            sOrderBy = "ORDER BY vcName";
                         }
                     }
                 }
@@ -579,10 +563,12 @@ namespace OneBase
                 sSQL += " WHERE (1=1) AND " + sWhere;
             }
 
-            if (sOrderBy.Length > 0)
+            if (sOrderBy.Length == 0)
             {
-                sSQL += " " + sOrderBy;
+                sOrderBy = "ORDER BY vcName";
             }
+
+            sSQL += " " + sOrderBy;
 
             return sSQL + ";";
         }
@@ -630,14 +616,17 @@ namespace OneBase
                 {
                     String InsertQuery = string.Format(
                        "INSERT INTO ColdToWarmDetails (numRowColdToWarm,datComment,vcCommentBy,vcInsStatus,vcNotes,vcMLTC,datFollowUp) VALUES ("
-                           + "{0},{1},{2},{3},{4},{5},{6})",
+                           + "{0},{1},{2},{3},{4},{5},{6});"
+                           + "UPDATE ColdToWarm SET vcLevel={7}, vcInterest={8} WHERE numRow={0}",
                             txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
                             "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
                             "'User'",
                             "'" + listboxInsStatus_ColdToWarm.SelectedItem + "'",
                             txtVcNotes.Text.Equals("") ? "NULL" : "'" + txtVcNotes.Text + "'",
                             txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
-                            txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + dateValue.ToString().Split()[0] + "'"
+                            txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + dateValue.ToString().Split()[0] + "'",
+                            txtVcLevel.Text.Equals("") ? "NULL" : "'" + txtVcLevel.Text + "'",
+                            txtVcReason.Text.Equals("") ? "NULL" : "'" + txtVcReason.Text + "'"
                             );
 
                     DataSet ds = GridDataTable(InsertQuery);
@@ -652,7 +641,8 @@ namespace OneBase
                     txtVcNotes.Text = "";
                     txtVcMltc.Text = "";
                     txtDatFollowUp.Text = "";
-
+                    txtVcLevel.Text = "";
+                    txtVcReason.Text = "";
                 }
             }
         }
@@ -748,7 +738,12 @@ namespace OneBase
                 DataList4.DataSource = ds.Tables[3];
                 DataList4.DataBind();
 
-                txtNumRow.Text = ds.Tables[2].Rows[0]["numRow"].ToString();
+                DataTable dtRecord = ds.Tables[2];
+                txtNumRow.Text = dtRecord.Rows[0]["numRow"].ToString();
+                listboxInsStatus_ColdToWarm.Text = dtRecord.Rows[0]["vcInsStatus"].ToString();
+
+                txtVcLevel.Text = dtRecord.Rows[0]["vcLevel"].ToString();
+                txtVcReason.Text = dtRecord.Rows[0]["vcInterest"].ToString();
             }
         }
 
